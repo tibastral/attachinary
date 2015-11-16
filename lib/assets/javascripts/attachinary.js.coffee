@@ -85,6 +85,8 @@
 
 
       @$input.bind 'fileuploaddone', (event, data) =>
+        if data.files[0].webkitRelativePath
+          data.result.relative_path = data.files[0].webkitRelativePath
         @addFile(data.result)
 
 
@@ -119,7 +121,7 @@
         @checkMaximum()
         @$input.trigger 'attachinary:fileadded', [file]
       else
-        alert @config.invalidFormatMessage
+        console.log @config.invalidFormatMessage
 
     removeFile: (fileIdToRemove) ->
       _files = []
